@@ -12,13 +12,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var displayLabel: UILabel!
     
-    @IBOutlet var buttonsCollection: [UIButton]!
+    var buttonsCollection = [UIButton]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         self.displayLabel.text = "0"
-        
+        initUIButtonCollection()
         
         //感知设备方向 - 开启监听设备方向
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
@@ -29,34 +30,45 @@ class ViewController: UIViewController {
         //UIDevice.currentDevice().endGeneratingDeviceOrientationNotifications()
     }
     
+    func initUIButtonCollection(){
+        for i in 1...19{
+            if let tempButton = view.viewWithTag(i) as? UIButton{
+                buttonsCollection.append(tempButton)
+                //buttonsCollection[i-1].layer.cornerRadius = buttonsCollection[i-1].frame.size.height/2
+                print("init 19")
+            }
+        }
+    }
+    
     //通知监听触发的方法
     @objc func receivedRotation(_ notification: Notification){
         let device = UIDevice.current
         switch device.orientation{
         case .portrait:
             changeCornerRadius(45)
-            break;
         case .landscapeLeft:
-            changeCornerRadius(23)
-            break;
+            fallthrough
         case .landscapeRight:
             changeCornerRadius(23)
-            break;
-        default:
-            break;
+        default: break
         }
     }
     
     func changeCornerRadius(_ radius:Double){
-
-        for i in 1...49{
-            if let tempButton = self.view.viewWithTag(i) as? UIButton{
-                buttonsCollection.append(tempButton)
-            }
-        }
         
-        for button in buttonsCollection{
-            button.layer.cornerRadius = CGFloat(radius)
+        if (radius == 23){
+            for i in 1...49{
+                if let tempButton = view.viewWithTag(i) as? UIButton{
+                    if(i > 19){
+                        buttonsCollection.append(tempButton)
+                    }
+                    buttonsCollection[i-1].layer.cornerRadius = CGFloat(radius)
+                }
+            }
+        }else{
+            for i in 1...19{
+                buttonsCollection[i-1].layer.cornerRadius = CGFloat(radius)
+            }
         }
     }
     
@@ -92,4 +104,3 @@ class ViewController: UIViewController {
     }
     
 }
-
