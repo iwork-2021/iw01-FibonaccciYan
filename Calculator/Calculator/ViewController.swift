@@ -34,8 +34,6 @@ class ViewController: UIViewController {
         for i in 1...19{
             if let tempButton = view.viewWithTag(i) as? UIButton{
                 buttonsCollection.append(tempButton)
-                //buttonsCollection[i-1].layer.cornerRadius = buttonsCollection[i-1].frame.size.height/2
-                print("init 19")
             }
         }
     }
