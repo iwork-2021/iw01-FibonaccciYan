@@ -22,28 +22,48 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2I-hQ-lC7">
                                         <rect key="frame" x="0.0" y="0.0" width="808" height="99"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWR-VJ-WYs">
-                                                <rect key="frame" x="12" y="9.3333333333333357" width="784" height="89.666666666666657"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="75"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWR-VJ-WYs">
+                                                <rect key="frame" x="100" y="9.3333333333333428" width="696" height="89.666666666666657"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="0">
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="75"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avj-Hn-V4R" userLabel="Rad Label">
+                                                <rect key="frame" x="31" y="78.666666666666671" width="29.666666666666671" height="20.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="avj-Hn-V4R" secondAttribute="bottom" id="3wu-On-DNd"/>
                                             <constraint firstAttribute="bottom" secondItem="qWR-VJ-WYs" secondAttribute="bottom" constant="12" id="4uW-JX-xli"/>
                                             <constraint firstAttribute="bottom" secondItem="qWR-VJ-WYs" secondAttribute="bottom" id="FdJ-vB-0V9"/>
                                             <constraint firstAttribute="width" constant="808" id="UhP-AC-X4h"/>
-                                            <constraint firstItem="qWR-VJ-WYs" firstAttribute="leading" secondItem="q2I-hQ-lC7" secondAttribute="leading" constant="12" id="Wlg-mz-MN6"/>
+                                            <constraint firstItem="avj-Hn-V4R" firstAttribute="leading" secondItem="q2I-hQ-lC7" secondAttribute="leading" constant="31" id="X71-nu-dXE"/>
                                             <constraint firstAttribute="height" constant="272" id="buq-fo-4Pg"/>
+                                            <constraint firstItem="qWR-VJ-WYs" firstAttribute="leading" secondItem="q2I-hQ-lC7" secondAttribute="leading" constant="100" id="fOC-H1-DcU"/>
                                             <constraint firstAttribute="trailing" secondItem="qWR-VJ-WYs" secondAttribute="trailing" constant="12" id="zxB-aT-3IL"/>
                                         </constraints>
                                         <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="avj-Hn-V4R"/>
+                                            </mask>
                                             <mask key="constraints">
                                                 <exclude reference="UhP-AC-X4h"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=regular">
+                                            <mask key="subviews">
+                                                <include reference="avj-Hn-V4R"/>
+                                            </mask>
                                             <mask key="constraints">
                                                 <include reference="UhP-AC-X4h"/>
                                                 <exclude reference="buq-fo-4Pg"/>
@@ -839,6 +859,7 @@
                     </view>
                     <connections>
                         <outlet property="displayLabel" destination="qWR-VJ-WYs" id="Zrk-fb-K2M"/>
+                        <outlet property="radLabel" destination="avj-Hn-V4R" id="NEK-if-X5a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

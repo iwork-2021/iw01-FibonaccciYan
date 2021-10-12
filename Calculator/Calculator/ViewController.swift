@@ -6,11 +6,12 @@
 //
 
 import UIKit
-import WebKit
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var displayLabel: UILabel!
+    
+    @IBOutlet weak var radLabel: UILabel!
     
     var buttonsCollection = [UIButton]()
     
@@ -19,6 +20,8 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         self.displayLabel.text = "0"
+        self.radLabel.text = ""
+        
         initUIButtonCollection()
         
         //感知设备方向 - 开启监听设备方向
@@ -53,7 +56,6 @@ class ViewController: UIViewController {
     }
     
     func changeCornerRadius(_ radius:Double){
-        
         if (radius == 23){
             for i in 1...49{
                 if let tempButton = view.viewWithTag(i) as? UIButton{
@@ -90,15 +92,86 @@ class ViewController: UIViewController {
         }
     }
     
+    var second: Bool = false
+    
     let calculator = Calculator()
     @IBAction func operatorTouched(_ sender:UIButton){
         if let op = sender.currentTitle {
-            if let result = calculator.performOperation(operation: op, operand: Double(digitOnDisplay)!){
-                digitOnDisplay = String(result)
+            
+            if op == "Rad" {
+                buttonsCollection[43].setTitle("Deg", for: .normal)
+                self.radLabel.text = "Rad"
+            }else if op == "Deg" {
+                buttonsCollection[43].setTitle("Rad", for: .normal)
+                self.radLabel.text = ""
+            }
+            
+            if op == "2ⁿᵈ" {
+                if second {
+                    buttonsCollection[29].setTitle("eˣ", for: .normal)
+                    buttonsCollection[30].setTitle("10ˣ", for: .normal)
+                    buttonsCollection[35].setTitle("ln", for: .normal)
+                    buttonsCollection[36].setTitle("log₁₀", for: .normal)
+                    buttonsCollection[38].setTitle("sin", for: .normal)
+                    buttonsCollection[39].setTitle("cos", for: .normal)
+                    buttonsCollection[40].setTitle("tan", for: .normal)
+                    buttonsCollection[44].setTitle("sinh", for: .normal)
+                    buttonsCollection[45].setTitle("cosh", for: .normal)
+                    buttonsCollection[46].setTitle("tanh", for: .normal)
+                }else{
+                    buttonsCollection[29].setTitle("yˣ", for: .normal)
+                    buttonsCollection[30].setTitle("2ˣ", for: .normal)
+                    buttonsCollection[35].setTitle("logᵧ", for: .normal)
+                    buttonsCollection[36].setTitle("log₂", for: .normal)
+                    buttonsCollection[38].setTitle("sin⁻¹", for: .normal)
+                    buttonsCollection[39].setTitle("cos⁻¹", for: .normal)
+                    buttonsCollection[40].setTitle("tan⁻¹", for: .normal)
+                    buttonsCollection[44].setTitle("sinh⁻¹", for: .normal)
+                    buttonsCollection[45].setTitle("cosh⁻¹", for: .normal)
+                    buttonsCollection[46].setTitle("tanh⁻¹", for: .normal)
+                }
+                second = !second
+            }
+            
+            if let tempResult = calculator.performOperation(operation: op, operand: Double(digitOnDisplay)!){
+                
+                let floatResult = Float((tempResult * 10000000).rounded()) / 10000000
+                var result = ""
+                
+                if floatResult.truncatingRemainder(dividingBy: 1) == 0{
+                    result += String(Int(floatResult))
+                }else{
+                    result += String(floatResult)
+                }
+                
+                digitOnDisplay = result
+                //switch UIDevice.current.orientation{
+                //case .portrait:
+                //    if(result.count > 9){
+                //        result = String(format:"9f",result)
+                //    }
+                //    digitOnDisplay = result
+                //case .landscapeLeft:
+                //    fallthrough
+                //case .landscapeRight:
+                //    if(result.count > 18){
+                //        result = String(format:"18f",result)
+                //    }
+                //    digitOnDisplay = result
+                //default: break
+                //}
             }
             
             inTypingMode = false
         }
     }
     
+}
+
+//Double保留指定位数小数
+extension Double{
+    func roundTo(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }
