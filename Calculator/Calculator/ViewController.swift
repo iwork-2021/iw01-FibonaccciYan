@@ -28,9 +28,6 @@ class ViewController: UIViewController {
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         //添加通知，监听设备方向改变
         NotificationCenter.default.addObserver(self, selector: #selector(receivedRotation), name: UIDevice.orientationDidChangeNotification, object: nil)
-
-        //关闭设备监听
-        //UIDevice.currentDevice().endGeneratingDeviceOrientationNotifications()
     }
     
     func initUIButtonCollection(){
@@ -145,33 +142,10 @@ class ViewController: UIViewController {
                 }
                 
                 digitOnDisplay = result
-                //switch UIDevice.current.orientation{
-                //case .portrait:
-                //    if(result.count > 9){
-                //        result = String(format:"9f",result)
-                //    }
-                //    digitOnDisplay = result
-                //case .landscapeLeft:
-                //    fallthrough
-                //case .landscapeRight:
-                //    if(result.count > 18){
-                //        result = String(format:"18f",result)
-                //    }
-                //    digitOnDisplay = result
-                //default: break
-                //}
             }
             
             inTypingMode = false
         }
     }
     
-}
-
-//Double保留指定位数小数
-extension Double{
-    func roundTo(places:Int) -> Double {
-        let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
-    }
 }
