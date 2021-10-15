@@ -10,6 +10,8 @@
 
 ## 实现（运行截图）
 
+演示视频请见 https://www.bilibili.com/video/BV1mQ4y1B7Tp?share_source=copy_web
+
 1. 基本界面
 
 + 竖屏：
